@@ -599,18 +599,22 @@ export default function ZoningStandards() {
           </div>
         )}
 
+        {/* Scrollable Table Area */}
+        <div style={{ overflowX: "auto", WebkitOverflowScrolling: "touch" }}>
+        <div style={{ minWidth: `${140 + county.districts.length * 80}px` }}>
+
         {/* District Header Bar */}
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: `200px repeat(${county.districts.length}, 1fr)`,
+            gridTemplateColumns: `140px repeat(${county.districts.length}, minmax(70px, 1fr))`,
             gap: 0,
             marginBottom: 24,
           }}
         >
           <div
             style={{
-              padding: "12px 16px",
+              padding: "12px 10px",
               fontFamily: "'DM Sans', sans-serif",
               fontSize: 11,
               fontWeight: 600,
@@ -706,7 +710,7 @@ export default function ZoningStandards() {
                 key={ri}
                 style={{
                   display: "grid",
-                  gridTemplateColumns: `200px repeat(${county.districts.length}, 1fr)`,
+                  gridTemplateColumns: `140px repeat(${county.districts.length}, minmax(70px, 1fr))`,
                   gap: 0,
                   borderBottom:
                     ri < section.rows.length - 1
@@ -716,7 +720,7 @@ export default function ZoningStandards() {
               >
                 <div
                   style={{
-                    padding: "10px 16px",
+                    padding: "10px 10px",
                     fontFamily: "'DM Sans', sans-serif",
                     fontSize: 12,
                     fontWeight: 500,
@@ -773,6 +777,10 @@ export default function ZoningStandards() {
             ))}
           </div>
         ))}
+
+        </div>
+        </div>
+        {/* End Scrollable Table Area */}
 
         {/* Definitions */}
         {county.definitions && county.definitions.length > 0 && (
