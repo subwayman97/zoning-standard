@@ -120,7 +120,7 @@ const COUNTIES = {
     ],
   },
   "Jackson County": {
-    note: "Source: Jackson County UDC & Health Dept Lot Ordinance. Verify with Planning & Zoning (706) 367-6348.",
+    note: "Source: Jackson County UDC Table 2-2 (Ord. 17-003, as amended through Ord. 22-005). Verified from official Code of Ordinances.",
     districts: [
       { code: "PCFD", density: "—" },
       { code: "A-1", density: "—" },
@@ -128,60 +128,87 @@ const COUNTIES = {
       { code: "A-3", density: "—" },
       { code: "AR", density: "—" },
       { code: "R-1", density: "—" },
-      { code: "R-2", density: "—" },
-      { code: "R-3", density: "—" },
+      { code: "R-2", density: "1.0/ac" },
+      { code: "R-3", density: "2.0/ac" },
       { code: "MH", density: "—" },
+      { code: "NRC", density: "—" },
+      { code: "CRC", density: "—" },
+      { code: "HRC", density: "—" },
+      { code: "LI", density: "—" },
+      { code: "GI", density: "—" },
+      { code: "HI", density: "—" },
     ],
     sections: [
       {
-        title: "Minimum Lot Area",
+        title: "Minimum Lot Area, Residential (Acres)",
         rows: [
-          { label: "Public Water + Septic", values: ["25 ac","5 ac","3 ac","1.5 ac","1.5 ac","26,136","15,000","10,000","15,000"], unit: "SF" },
-          { label: "Private Water + Septic", values: ["25 ac","5 ac","3 ac","1.5 ac","1.5 ac","65,340","43,560","21,780","43,560"], unit: "SF" },
+          { label: "Well + Septic", values: ["10","1.5","8","1.5","1.5","1.5","N/A","N/A","1.5","—","—","—","—","—","—"], unit: "ac" },
+          { label: "Public Water + Septic", values: ["10","1.5","8","1.5","1.5","0.75","N/A","N/A","1.5","—","—","—","—","—","—"], unit: "ac" },
+          { label: "Public Water + Sewer", values: ["10","1.5","8","1.5","1.5","0.5","N/A","N/A","1.5","—","—","—","—","—","—"], unit: "ac" },
         ],
       },
       {
-        title: "Minimum Lot Width",
+        title: "Minimum Lot Area, Nonresidential (Acres)",
         rows: [
-          { label: "Lot Width", values: ["500","300","210","150","150","100","80","60","80"], unit: "FT" },
+          { label: "Well + Septic", values: ["—","—","—","—","—","—","—","—","—","1.0","1.0","1.0","1.0","1.0","25"], unit: "ac" },
+          { label: "Public Water + Septic", values: ["—","—","—","—","—","—","—","—","—","0.5","0.5","0.5","0.5","0.5","25"], unit: "ac" },
+          { label: "Public Water + Sewer", values: ["—","—","—","—","—","—","—","—","—","0.23","0.23","0.23","0.46","0.46","0.46"], unit: "ac" },
         ],
       },
       {
-        title: "Minimum Lot Frontage",
+        title: "Minimum Lot Width (Feet)",
         rows: [
-          { label: "Frontage", values: ["200","200","150","100","100","60","50","35","50"], unit: "FT" },
-        ],
-      },
-      {
-        title: "Minimum Floor Area per DU",
-        rows: [
-          { label: "Single-Family", values: ["—","1,800","1,800","1,600","1,600","1,200","1,000","800","—"], unit: "SF" },
+          { label: "Well + Septic", values: ["200","200","200","200","150","150","150","150","150","150","150","150","150","150","200"], unit: "FT" },
+          { label: "Public Water + Septic", values: ["200","200","200","200","150","100","100","100","150","100","100","100","100","100","200"], unit: "FT" },
+          { label: "Public Water + Sewer", values: ["200","200","200","200","150","80","80","80","150","50","50","50","50","50","200"], unit: "FT" },
         ],
       },
       {
         title: "Max Height of Building or Structure",
         rows: [
-          { label: "Max Height", values: ["45","45","45","45","45","35","35","45","35"], unit: "FT" },
+          { label: "Max Height", values: ["35","35","35","35","35","35","35","35","35","35","50","50","50","50","50"], unit: "FT" },
+          { label: "Max Stories", values: ["3","3","3","3","3","3","3","3","3","2","4","5","4","4","4"], unit: "" },
         ],
       },
       {
-        title: "Minimum Building Setbacks",
+        title: "Minimum Principal Building Setback (Feet)",
         rows: [
-          { label: "Front", values: ["60","60","50","40","40","30","25","25","25"], unit: "FT" },
-          { label: "Side", values: ["30","30","25","20","20","10","10","10","10"], unit: "FT" },
-          { label: "Rear", values: ["50","50","40","40","40","25","20","25","25"], unit: "FT" },
+          { label: "Front", values: ["50","50","50","50","50","30","30","30","50","50","50","50","50","50","500"], unit: "FT" },
+          { label: "Side", values: ["40","40","40","40","40","20","20","20","40","15","15","15","20","20","500"], unit: "FT" },
+          { label: "Rear", values: ["40","40","40","40","40","40","40","40","40","40","40","40","40","40","500"], unit: "FT" },
         ],
       },
       {
-        title: "Maximum Building Coverage",
+        title: "Maximum Building Coverage (% of Lot)",
         rows: [
-          { label: "% of Lot", values: ["10%","15%","20%","25%","30%","35%","40%","50%","40%"], unit: "" },
+          { label: "Max Coverage", values: ["20%","25%","25%","25%","25%","35%","40%","40%","25%","40%","50%","60%","75%","75%","40%"], unit: "" },
+        ],
+      },
+      {
+        title: "Maximum Nonresidential FAR (Floor to Area Ratio)",
+        rows: [
+          { label: "Max FAR", values: ["—","—","—","—","—","—","—","—","—","0.25","0.5","0.5","0.75","0.75","0.75"], unit: "" },
+        ],
+      },
+      {
+        title: "Minimum Buffer Width Along Sides/Rear Abutting District",
+        rows: [
+          { label: "R-1 or R-2", values: ["50","50","50","50","50","—","—","—","—","—","—","—","—","—","—"], unit: "FT" },
+          { label: "R-3", values: ["50","50","50","50","50","50","—","—","—","—","—","—","—","—","—"], unit: "FT" },
+          { label: "NRC or CRC", values: ["50","50","50","50","50","50","50","50","50","—","—","—","—","—","—"], unit: "FT" },
+          { label: "HRC", values: ["100","100","100","100","100","100","100","100","100","—","—","—","—","—","—"], unit: "FT" },
+          { label: "LI", values: ["120","120","120","120","120","120","120","120","120","—","—","—","—","—","—"], unit: "FT" },
+          { label: "GI", values: ["150","150","150","150","150","150","150","150","150","—","—","—","—","—","—"], unit: "FT" },
+          { label: "HI", values: ["500","500","500","500","500","500","500","500","500","500","500","500","500","500","—"], unit: "FT" },
         ],
       },
     ],
     definitions: [
-      { term: "A-2 Lot Split Exception", text: "Any lot in A-2 containing 8+ acres may be divided into no more than 3 lots (including original) at min 1.5 acres each, provided lot width and frontage requirements are met." },
-      { term: "Health Dept Lot Size", text: "Min lot per Board of Health: 0.6 acres (26,136 SF) with public water and approved on-site sewage; 1.5 acres with non-public water." },
+      { term: "Lot Frontage (Sec 117)", text: "Every lot must front at least 60 ft on an approved street. Cul-de-sac lots: min 35 ft frontage. Fee-simple townhouses: min 25 ft frontage." },
+      { term: "A-2 Lot Split Exception (Sec 213)", text: "Any A-2 lot of 8+ acres may be divided into no more than 2 lots (including original tract) at min 1.5 acres each. No further subdivision except as major subdivision." },
+      { term: "A-2 Access Easement Exception", text: "A-2 lots of 8+ acres may front on a 60-ft-wide access easement with a min 10-ft paved/unpaved access way, and an 80-ft cul-de-sac if more than 2 lots are created." },
+      { term: "Environmental Health Override", text: "Jackson County Environmental Health Department may require larger lot sizes and widths than the UDC minimums when served by on-site sewage (septic)." },
+      { term: "A-1 District Status", text: "The A-1 district is inactive. Existing A-1 properties remain A-1 until rezoned. No new applications to rezone property TO A-1 will be accepted." },
     ],
   },
   "Banks County": {
@@ -580,22 +607,22 @@ export default function ZoningStandards() {
 
       {/* Content */}
       <div style={{ maxWidth: 1200, margin: "0 auto", padding: "24px 24px 60px" }}>
-        {/* Verification Note */}
+        {/* Source Note */}
         {county.note && (
           <div
             style={{
               padding: "10px 16px",
               marginBottom: 16,
-              background: "#fff8e6",
-              border: "1px solid #f0d060",
+              background: county.note.toLowerCase().includes("verify") ? "#fff8e6" : "#eef4fa",
+              border: county.note.toLowerCase().includes("verify") ? "1px solid #f0d060" : "1px solid #c3d8ea",
               borderRadius: 8,
               fontFamily: "'DM Sans', sans-serif",
               fontSize: 12,
-              color: "#7a6520",
+              color: county.note.toLowerCase().includes("verify") ? "#7a6520" : "#34567a",
               lineHeight: 1.5,
             }}
           >
-            ⚠️ {county.note}
+            {county.note.toLowerCase().includes("verify") ? "⚠️" : "ℹ️"} {county.note}
           </div>
         )}
 
