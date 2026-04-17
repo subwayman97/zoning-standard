@@ -435,6 +435,89 @@ const COUNTIES = {
       },
     ],
   },
+  "White County": {
+    note: "Source: White County Code of Ordinances, Appendix C Land Use Regulations (Res. 2019-09, as amended through Res. 2025-02). White County does not use a unified dimensional table — values are pulled from individual district articles.",
+    districts: [
+      { code: "A-1", density: "—" },
+      { code: "R-1", density: "—" },
+      { code: "R-2", density: "16/ac" },
+      { code: "R-3", density: "—" },
+      { code: "C-1", density: "—" },
+      { code: "C-2", density: "—" },
+      { code: "I", density: "—" },
+      { code: "PD", density: "—" },
+    ],
+    sections: [
+      {
+        title: "Minimum Lot Size",
+        rows: [
+          { label: "Min Lot Area", values: ["10 ac","1 ac","—","—","—","—","—","20 ac"], unit: "" },
+        ],
+      },
+      {
+        title: "Minimum Lot Frontage (Sec 508)",
+        rows: [
+          { label: "Min Street Frontage", values: ["60","60","60","60","60","60","60","100"], unit: "FT" },
+          { label: "Cul-de-sac Frontage", values: ["35","35","35","35","35","35","35","35"], unit: "FT" },
+        ],
+      },
+      {
+        title: "Minimum Lot Width",
+        rows: [
+          { label: "Lot Width", values: ["—","—","—","—","—","—","—","500"], unit: "FT" },
+        ],
+      },
+      {
+        title: "Minimum Principal Building Setback",
+        rows: [
+          { label: "All Property Lines", values: ["15","15","15","15","15","15","15","15"], unit: "FT" },
+          { label: "Side/Rear w/ Buffer", values: ["—","—","30","—","—","—","—","—"], unit: "FT" },
+          { label: "Buffer from Res/Ag", values: ["—","—","—","—","—","—","100","—"], unit: "FT" },
+        ],
+      },
+      {
+        title: "Separation Between Principal Buildings",
+        rows: [
+          { label: "Min Separation", values: ["20","20","20","20","20","20","20","20"], unit: "FT" },
+        ],
+      },
+      {
+        title: "Max Density (Dwelling Units)",
+        rows: [
+          { label: "Multi-family", values: ["—","—","16","—","—","—","—","—"], unit: "/ac" },
+          { label: "Mfd Home Parks", values: ["—","—","1","—","—","—","—","—"], unit: "/ac" },
+          { label: "Attached SF (cond.)", values: ["—","—","4","—","—","—","—","—"], unit: "/ac" },
+          { label: "Detached Cottage (cond.)", values: ["—","—","5","—","—","—","—","—"], unit: "/ac" },
+        ],
+      },
+      {
+        title: "Min Landscaped Open Space",
+        rows: [
+          { label: "% of Land Area", values: ["—","—","20%","—","—","—","—","—"], unit: "" },
+        ],
+      },
+      {
+        title: "Accessory Buildings (Sec 511)",
+        rows: [
+          { label: "Max Per Acre", values: ["3","3","3","3","3","3","3","3"], unit: "" },
+          { label: "Setback", values: ["15","15","15","15","15","15","15","15"], unit: "FT" },
+          { label: "Max Height (Res)", values: ["50","50","50","50","—","—","—","50"], unit: "FT" },
+          { label: "Min Dist from Principal Bldg", values: ["10","10","10","10","10","10","10","10"], unit: "FT" },
+        ],
+      },
+    ],
+    definitions: [
+      { term: "A-1 Non-Farm Residences (Sec 901)", text: "Non-farm single-family residences in A-1 require a minimum lot size of 10 acres, must be placed in accordance with all White County environmental codes, and must comply with any applicable conservation use covenant." },
+      { term: "R-1 Minimum Lot (Sec 1003)", text: "Stand-alone lots or residential developments in R-1 require a minimum of 1 acre." },
+      { term: "R-2 Density & Buffers (Sec 1100, 1103.7)", text: "Multi-family up to 16 units/acre. Manufactured home parks limited to 1 unit/acre. Conditional attached single-family max 4/ac; detached cottage max 5/ac. Side and rear setback with buffer min 30 ft. Min 20% of land area as landscaped open space." },
+      { term: "Industrial Buffer (Sec 1500)", text: "All uses in the Industrial district must be setback and buffered a minimum of 100 feet from all residential and agricultural districts. Racetracks require minimum 25-acre site." },
+      { term: "Planned Development (Sec 1600)", text: "PD must contain min 20 contiguous acres, min 500-ft lot width, and min 100 ft of frontage on a public street. Multi-family limited to 25% of total dwelling units; commercial/office limited to 40% of total land area." },
+      { term: "Churches & Cemeteries", text: "In A-1 and R-1 districts, cemeteries, churches, temples, synagogues, and places of worship must be set back 50 feet from all property lines." },
+      { term: "Agri-tourism & Events (A-1)", text: "Agri-tourism, heritage tourism, wedding tourism, event facilities, and attractions in A-1 must be buffered and located a minimum of 100 feet from the boundary of any other land use district." },
+      { term: "Street Frontage (Sec 508)", text: "All districts: minimum 60 ft street frontage. Cul-de-sac lots: min 35 ft. Double or reverse frontage lots must have proper frontage on all sides usable for access." },
+      { term: "Accessory Structures (Sec 512)", text: "Gasoline pumps: 30-ft setback. Canopies: 20-ft setback. Swimming pools: 30-ft setback. Commercial outdoor play structures: 35-ft setback." },
+    ],
+  },
 };
 
 const HIGHLIGHT_COLORS = {
@@ -442,6 +525,7 @@ const HIGHLIGHT_COLORS = {
   "Jackson County": { bg: "#5c3317", accent: "#8b572a", light: "#f5ede6" },
   "Banks County": { bg: "#4a2060", accent: "#7b3fa0", light: "#f0e6f6" },
   "Oconee County": { bg: "#1a3a56", accent: "#2a6a9e", light: "#e4eef8" },
+  "White County": { bg: "#3d4a5c", accent: "#5f7a9e", light: "#eaeef4" },
 };
 
 export default function ZoningStandards() {
