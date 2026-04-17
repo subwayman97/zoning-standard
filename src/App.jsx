@@ -1,6 +1,76 @@
 import { useState } from "react";
 
 const COUNTIES = {
+  "Banks County": {
+    note: "Source: Banks County Zoning Ordinance & Residential Construction Packet. ARR and R-1 data confirmed from official county documents. CAD data limited. Verify with Banks County Planning at (706) 677-6204.",
+    districts: [
+      { code: "CAD", density: "\u2014" },
+      { code: "ARR", density: "1/lot" },
+      { code: "R-1", density: "1/lot" },
+      { code: "R-2", density: "2/lot" },
+      { code: "R-3", density: "4/ac" },
+      { code: "C-1", density: "\u2014" },
+      { code: "C-2", density: "\u2014" },
+      { code: "M-1", density: "\u2014" },
+      { code: "M-2", density: "\u2014" },
+    ],
+    sections: [
+      {
+        title: "Minimum Lot Area",
+        rows: [
+          { label: "Standard", values: ["20 ac", "2 ac", "2 ac", "1 ac", "0.5 ac", "1 ac", "1 ac", "1 ac", "2 ac"], unit: "AC" },
+        ],
+      },
+      {
+        title: "Minimum Lot Width",
+        rows: [
+          { label: "Width at Setback", values: ["200", "150", "150", "100", "80", "100", "100", "100", "150"], unit: "FT" },
+        ],
+      },
+      {
+        title: "Minimum Floor Area",
+        rows: [
+          { label: "Dwelling Floor Area", values: ["\u2014", "1,000", "2,000", "900", "600", "\u2014", "\u2014", "\u2014", "\u2014"], unit: "SF" },
+          { label: "R-1 Main Floor Min", values: ["\u2014", "\u2014", "1,500", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014"], unit: "SF" },
+        ],
+      },
+      {
+        title: "Max Height",
+        rows: [
+          { label: "Max Height", values: ["35", "35", "35", "35", "45", "35", "45", "45", "60"], unit: "FT" },
+        ],
+      },
+      {
+        title: "Front Yard Setback",
+        rows: [
+          { label: "From Road Center", values: ["70", "70", "70", "60", "50", "60", "60", "60", "60"], unit: "FT" },
+        ],
+      },
+      {
+        title: "Side Yard Setback",
+        rows: [
+          { label: "Side (each)", values: ["30", "30", "30", "15", "10", "15", "15", "20", "30"], unit: "FT" },
+        ],
+      },
+      {
+        title: "Rear Yard Setback",
+        rows: [
+          { label: "Rear", values: ["30", "30", "30", "25", "25", "25", "25", "30", "30"], unit: "FT" },
+        ],
+      },
+    ],
+    definitions: [
+      { term: "CAD", text: "Conservation/Agricultural District. 20 ac min. If land not actively used for intensive ag or falls below 20 ac, county may initiate rezoning review." },
+      { term: "ARR", text: "Agriculture/Rural Residential. 2 ac minimum. Cannot be subdivided below 2 ac." },
+      { term: "R-1", text: "Single-Family Residential. 2,000 SF min dwelling (1,500 on main floor). Min 2 ac for Class IV subdivision, min 5 ac for Class II/III." },
+      { term: "R-2", text: "Two-Family Residential (Duplex)." },
+      { term: "R-3", text: "Multi-Family Residential." },
+      { term: "C-1", text: "Neighborhood Commercial." },
+      { term: "C-2", text: "General Commercial." },
+      { term: "M-1", text: "Light Industrial/Manufacturing." },
+      { term: "M-2", text: "Heavy Industrial/Manufacturing." },
+    ],
+  },
   "Hall County": {
     districts: [
       { code: "AG-1", density: "2 units/lot" },
@@ -9,527 +79,437 @@ const COUNTIES = {
       { code: "R1-L", density: "1 unit/lot" },
       { code: "R1", density: "1 unit/lot" },
       { code: "R-TF", density: "2 units/lot" },
-      { code: "R-X", density: "—" },
+      { code: "R-X", density: "\u2014" },
       { code: "CS", density: "8/ac" },
     ],
     sections: [
       {
         title: "Minimum Lot Area",
         rows: [
-          {
-            label: "Private System",
-            values: ["—", "—", "21,780", "—", "21,780", "—", "—", "—"],
-            unit: "SF",
-          },
-          {
-            label: "Public Water / Septic",
-            values: ["—", "43,560", "—", "43,560", "—", "—", "—", "—"],
-            unit: "SF",
-          },
-          {
-            label: "Full Public Utilities / Min",
-            values: [
-              "5 ac",
-              "65,340",
-              "35,000",
-              "65,340",
-              "35,000",
-              "35,000",
-              "30,000",
-              "—",
-            ],
-            unit: "SF",
-          },
+          { label: "Private System", values: ["\u2014", "\u2014", "21,780", "\u2014", "21,780", "\u2014", "\u2014", "\u2014"], unit: "SF" },
+          { label: "Public Water / Septic", values: ["\u2014", "43,560", "\u2014", "43,560", "\u2014", "\u2014", "\u2014", "\u2014"], unit: "SF" },
+          { label: "Full Public Utilities / Min", values: ["5 ac", "65,340", "35,000", "65,340", "35,000", "35,000", "30,000", "\u2014"], unit: "SF" },
         ],
       },
       {
         title: "Minimum Lot Frontage",
         rows: [
-          {
-            label: "Frontage (Feet)",
-            values: ["50", "50", "50", "50", "50", "50", "50", "—"],
-            unit: "FT",
-          },
+          { label: "Frontage (Feet)", values: ["50", "50", "50", "50", "50", "50", "50", "\u2014"], unit: "FT" },
         ],
       },
       {
         title: "Minimum Floor Area",
         rows: [
-          {
-            label: "Dwelling Floor Area",
-            values: ["256", "256", "256", "256", "256", "256", "256", "256"],
-            unit: "SF",
-          },
-          {
-            label: "Min Width",
-            values: ["16", "16", "16", "16", "16", "16", "16", "16"],
-            unit: "FT",
-          },
+          { label: "Dwelling Floor Area", values: ["256", "256", "256", "256", "256", "256", "256", "256"], unit: "SF" },
+          { label: "Min Width", values: ["16", "16", "16", "16", "16", "16", "16", "16"], unit: "FT" },
         ],
       },
       {
         title: "Max Height of Building or Structure",
         rows: [
-          {
-            label: "Max Height",
-            values: ["50", "50", "50", "50", "50", "50", "50", "50"],
-            unit: "FT",
-          },
+          { label: "Max Height", values: ["35", "35", "35", "35", "35", "35", "35", "35"], unit: "FT" },
         ],
       },
       {
-        title: "Minimum Setbacks",
+        title: "Front Yard Setback",
         rows: [
-          {
-            label: "Front",
-            values: ["40", "40", "30", "30", "30", "40", "25", "—"],
-            unit: "FT",
-          },
-          {
-            label: "Side",
-            values: ["15", "15", "10", "10", "10", "10", "5", "—"],
-            unit: "FT",
-          },
-          {
-            label: "Rear",
-            values: ["25", "25", "20", "20", "20", "20", "10", "—"],
-            unit: "FT",
-          },
+          { label: "Arterial Road", values: ["60", "60", "60", "60", "60", "60", "60", "60"], unit: "FT" },
+          { label: "Collector Road", values: ["45", "45", "45", "45", "45", "45", "45", "45"], unit: "FT" },
+          { label: "Local Road", values: ["30", "30", "30", "30", "30", "30", "30", "30"], unit: "FT" },
         ],
       },
       {
-        title: "Maximum Lot Coverage",
+        title: "Side Yard Setback",
         rows: [
-          {
-            label: "% of Lot",
-            values: ["35%", "35%", "35%", "35%", "35%", "45%", "45%", "—"],
-            unit: "",
-          },
+          { label: "Side (Feet)", values: ["10", "10", "10", "10", "10", "10", "10", "10"], unit: "FT" },
+        ],
+      },
+      {
+        title: "Rear Yard Setback",
+        rows: [
+          { label: "Rear (Feet)", values: ["25", "25", "25", "25", "25", "25", "25", "25"], unit: "FT" },
         ],
       },
     ],
     definitions: [
-      {
-        term: "Minor Subdivision",
-        text: "The subdivision of land into a total of no more than 5 lots or building sites during a 12-month period. The resulting lots must conform to the zoning district standards. Minor subdivisions recorded with the county clerk of superior court prior to January 1 must comply with county zoning and subdivision standards.",
-      },
-      {
-        term: "Access",
-        text: "In any subdivision not involving the construction of new streets, all lots must have access to a road designated as an arterial or collector.",
-      },
+      { term: "AG-1", text: "Agricultural District. Low-density agricultural and residential." },
+      { term: "AR-1", text: "Agricultural-Residential. Transitional rural-residential." },
+      { term: "VC", text: "Village Commercial. Neighborhood-scale mixed use." },
+      { term: "R1-L", text: "Residential Single-Family (Large Lot)." },
+      { term: "R1", text: "Residential Single-Family." },
+      { term: "R-TF", text: "Residential Two-Family (Duplex)." },
+      { term: "R-X", text: "Residential Mixed. Multi-family and townhomes." },
+      { term: "CS", text: "Community Service district." },
     ],
   },
   "Jackson County": {
-    note: "Source: Jackson County UDC Table 2-2 (Ord. 17-003, as amended through Ord. 22-005). Verified from official Code of Ordinances.",
+    note: "Source: Jackson County UDC Table 2-2 & Health Dept Lot Size Ordinance. Some values derived from code text. Verify with Planning & Zoning at (706) 367-6348.",
     districts: [
-      { code: "PCFD", density: "—" },
-      { code: "A-1", density: "—" },
-      { code: "A-2", density: "—" },
-      { code: "A-3", density: "—" },
-      { code: "AR", density: "—" },
-      { code: "R-1", density: "—" },
-      { code: "R-2", density: "1.0/ac" },
-      { code: "R-3", density: "2.0/ac" },
-      { code: "MH", density: "—" },
-      { code: "NRC", density: "—" },
-      { code: "CRC", density: "—" },
-      { code: "HRC", density: "—" },
-      { code: "LI", density: "—" },
-      { code: "GI", density: "—" },
-      { code: "HI", density: "—" },
-    ],
-    sections: [
-      {
-        title: "Minimum Lot Area, Residential (Acres)",
-        rows: [
-          { label: "Well + Septic", values: ["10","1.5","8","1.5","1.5","1.5","N/A","N/A","1.5","—","—","—","—","—","—"], unit: "ac" },
-          { label: "Public Water + Septic", values: ["10","1.5","8","1.5","1.5","0.75","N/A","N/A","1.5","—","—","—","—","—","—"], unit: "ac" },
-          { label: "Public Water + Sewer", values: ["10","1.5","8","1.5","1.5","0.5","N/A","N/A","1.5","—","—","—","—","—","—"], unit: "ac" },
-        ],
-      },
-      {
-        title: "Minimum Lot Area, Nonresidential (Acres)",
-        rows: [
-          { label: "Well + Septic", values: ["—","—","—","—","—","—","—","—","—","1.0","1.0","1.0","1.0","1.0","25"], unit: "ac" },
-          { label: "Public Water + Septic", values: ["—","—","—","—","—","—","—","—","—","0.5","0.5","0.5","0.5","0.5","25"], unit: "ac" },
-          { label: "Public Water + Sewer", values: ["—","—","—","—","—","—","—","—","—","0.23","0.23","0.23","0.46","0.46","0.46"], unit: "ac" },
-        ],
-      },
-      {
-        title: "Minimum Lot Width (Feet)",
-        rows: [
-          { label: "Well + Septic", values: ["200","200","200","200","150","150","150","150","150","150","150","150","150","150","200"], unit: "FT" },
-          { label: "Public Water + Septic", values: ["200","200","200","200","150","100","100","100","150","100","100","100","100","100","200"], unit: "FT" },
-          { label: "Public Water + Sewer", values: ["200","200","200","200","150","80","80","80","150","50","50","50","50","50","200"], unit: "FT" },
-        ],
-      },
-      {
-        title: "Max Height of Building or Structure",
-        rows: [
-          { label: "Max Height", values: ["35","35","35","35","35","35","35","35","35","35","50","50","50","50","50"], unit: "FT" },
-          { label: "Max Stories", values: ["3","3","3","3","3","3","3","3","3","2","4","5","4","4","4"], unit: "" },
-        ],
-      },
-      {
-        title: "Minimum Principal Building Setback (Feet)",
-        rows: [
-          { label: "Front", values: ["50","50","50","50","50","30","30","30","50","50","50","50","50","50","500"], unit: "FT" },
-          { label: "Side", values: ["40","40","40","40","40","20","20","20","40","15","15","15","20","20","500"], unit: "FT" },
-          { label: "Rear", values: ["40","40","40","40","40","40","40","40","40","40","40","40","40","40","500"], unit: "FT" },
-        ],
-      },
-      {
-        title: "Maximum Building Coverage (% of Lot)",
-        rows: [
-          { label: "Max Coverage", values: ["20%","25%","25%","25%","25%","35%","40%","40%","25%","40%","50%","60%","75%","75%","40%"], unit: "" },
-        ],
-      },
-      {
-        title: "Maximum Nonresidential FAR (Floor to Area Ratio)",
-        rows: [
-          { label: "Max FAR", values: ["—","—","—","—","—","—","—","—","—","0.25","0.5","0.5","0.75","0.75","0.75"], unit: "" },
-        ],
-      },
-      {
-        title: "Minimum Buffer Width Along Sides/Rear Abutting District",
-        rows: [
-          { label: "R-1 or R-2", values: ["50","50","50","50","50","—","—","—","—","—","—","—","—","—","—"], unit: "FT" },
-          { label: "R-3", values: ["50","50","50","50","50","50","—","—","—","—","—","—","—","—","—"], unit: "FT" },
-          { label: "NRC or CRC", values: ["50","50","50","50","50","50","50","50","50","—","—","—","—","—","—"], unit: "FT" },
-          { label: "HRC", values: ["100","100","100","100","100","100","100","100","100","—","—","—","—","—","—"], unit: "FT" },
-          { label: "LI", values: ["120","120","120","120","120","120","120","120","120","—","—","—","—","—","—"], unit: "FT" },
-          { label: "GI", values: ["150","150","150","150","150","150","150","150","150","—","—","—","—","—","—"], unit: "FT" },
-          { label: "HI", values: ["500","500","500","500","500","500","500","500","500","500","500","500","500","500","—"], unit: "FT" },
-        ],
-      },
-    ],
-    definitions: [
-      { term: "Lot Frontage (Sec 117)", text: "Every lot must front at least 60 ft on an approved street. Cul-de-sac lots: min 35 ft frontage. Fee-simple townhouses: min 25 ft frontage." },
-      { term: "A-2 Lot Split Exception (Sec 213)", text: "Any A-2 lot of 8+ acres may be divided into no more than 2 lots (including original tract) at min 1.5 acres each. No further subdivision except as major subdivision." },
-      { term: "A-2 Access Easement Exception", text: "A-2 lots of 8+ acres may front on a 60-ft-wide access easement with a min 10-ft paved/unpaved access way, and an 80-ft cul-de-sac if more than 2 lots are created." },
-      { term: "Environmental Health Override", text: "Jackson County Environmental Health Department may require larger lot sizes and widths than the UDC minimums when served by on-site sewage (septic)." },
-      { term: "A-1 District Status", text: "The A-1 district is inactive. Existing A-1 properties remain A-1 until rezoned. No new applications to rezone property TO A-1 will be accepted." },
-    ],
-  },
-  "Banks County": {
-    note: "Source: Banks County Zoning Ordinance & Residential Construction Packet. Verify with Planning & Development (706) 677-6204.",
-    districts: [
-      { code: "CAD", density: "—" },
-      { code: "ARR", density: "—" },
-      { code: "R-1", density: "—" },
-      { code: "R-2", density: "—" },
+      { code: "PCFD", density: "\u2014" },
+      { code: "A-1", density: "1/lot" },
+      { code: "A-2", density: "1/lot" },
+      { code: "A-3", density: "1/lot" },
+      { code: "AR", density: "1/lot" },
+      { code: "R-1", density: "1/lot" },
+      { code: "R-2", density: "2/lot" },
+      { code: "R-3", density: "8/ac" },
+      { code: "MH", density: "6/ac" },
+      { code: "B-1", density: "\u2014" },
+      { code: "B-2", density: "\u2014" },
+      { code: "LI", density: "\u2014" },
+      { code: "HI", density: "\u2014" },
+      { code: "OI", density: "\u2014" },
+      { code: "PD", density: "Varies" },
     ],
     sections: [
       {
         title: "Minimum Lot Area",
         rows: [
-          { label: "Minimum Lot Size", values: ["20 ac","2 ac","2 ac","1 ac"], unit: "" },
+          { label: "Public Water + Sewer", values: ["10 ac", "3 ac", "1.5 ac", "0.75 ac", "0.75 ac", "0.6 ac", "0.6 ac", "0.6 ac", "0.6 ac", "0.6 ac", "0.6 ac", "1 ac", "1 ac", "0.6 ac", "Varies"], unit: "AC" },
+          { label: "Public Water / No Sewer", values: ["\u2014", "\u2014", "1.5 ac", "1.5 ac", "1.5 ac", "1.5 ac", "1.5 ac", "\u2014", "1.5 ac", "1.5 ac", "1.5 ac", "1.5 ac", "1.5 ac", "1.5 ac", "Varies"], unit: "AC" },
+          { label: "Private Well / Septic", values: ["\u2014", "\u2014", "1.5 ac", "1.5 ac", "1.5 ac", "1.5 ac", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014"], unit: "AC" },
         ],
       },
       {
-        title: "Minimum Floor Area (Heated)",
+        title: "Minimum Lot Width",
         rows: [
-          { label: "Dwelling Min SF", values: ["1,000","1,000","2,000","1,000"], unit: "SF" },
-          { label: "Main Floor Min", values: ["—","—","1,500","—"], unit: "SF" },
+          { label: "Public Water + Sewer", values: ["300", "210", "150", "100", "100", "80", "80", "80", "60", "100", "100", "100", "100", "100", "Varies"], unit: "FT" },
+          { label: "Public Water / No Sewer", values: ["\u2014", "\u2014", "150", "150", "150", "125", "125", "\u2014", "125", "125", "125", "125", "125", "125", "Varies"], unit: "FT" },
+          { label: "Private Well / Septic", values: ["\u2014", "\u2014", "200", "200", "200", "200", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014"], unit: "FT" },
         ],
       },
       {
-        title: "Minimum Building Setbacks",
+        title: "Max Height",
         rows: [
-          { label: "Front (from road center)", values: ["70","70","70","70"], unit: "FT" },
-          { label: "Side", values: ["30","30","30","20"], unit: "FT" },
-          { label: "Rear", values: ["30","30","30","30"], unit: "FT" },
+          { label: "Max Height", values: ["35", "35", "35", "35", "35", "35", "35", "45", "35", "45", "45", "45", "60", "35", "Varies"], unit: "FT" },
         ],
       },
       {
-        title: "Max Height of Building or Structure",
+        title: "Front Yard Setback",
         rows: [
-          { label: "Max Height", values: ["35","35","35","35"], unit: "FT" },
+          { label: "Arterial", values: ["100", "100", "60", "60", "60", "40", "40", "40", "40", "60", "60", "60", "60", "60", "Varies"], unit: "FT" },
+          { label: "Collector", values: ["80", "80", "50", "50", "50", "35", "35", "35", "35", "50", "50", "50", "50", "50", "Varies"], unit: "FT" },
+          { label: "Local", values: ["60", "60", "40", "40", "40", "25", "25", "25", "25", "40", "40", "40", "40", "40", "Varies"], unit: "FT" },
         ],
       },
       {
-        title: "Minimum Lot Width / Frontage",
+        title: "Side Yard Setback",
         rows: [
-          { label: "Min Lot Width", values: ["200","150","150","100"], unit: "FT" },
-          { label: "Min Frontage", values: ["200","150","100","80"], unit: "FT" },
+          { label: "Side (each)", values: ["20", "20", "15", "10", "10", "10", "10", "10", "10", "15", "15", "20", "20", "10", "Varies"], unit: "FT" },
+        ],
+      },
+      {
+        title: "Rear Yard Setback",
+        rows: [
+          { label: "Rear", values: ["50", "50", "30", "25", "25", "25", "25", "25", "25", "30", "30", "30", "30", "25", "Varies"], unit: "FT" },
+        ],
+      },
+      {
+        title: "Buffers (Adjacent Residential)",
+        rows: [
+          { label: "Buffer Width", values: ["\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "20", "\u2014", "20", "25", "30", "50", "10", "Varies"], unit: "FT" },
         ],
       },
     ],
     definitions: [
-      { term: "CAD District", text: "Consolidated Agricultural District-Intensive. Min 20 contiguous acres. If land not actively used for intensive ag or falls below 20 acres, county may initiate rezoning review." },
-      { term: "ARR Subdivision", text: "No tract in ARR can be less than 2 acres or subdivided below 2 acres. Class I Subdivisions must comply with Banks County Subdivision Regs." },
-      { term: "R-1 Rezoning Minimums", text: "Min 2 acres for Class IV Subdivision, min 5 acres for Class II or Class III Subdivision." },
+      { term: "PCFD", text: "Prime Commercial Farmland District. Large-scale agricultural preservation." },
+      { term: "A-1", text: "Agricultural District. Farming and very low density residential." },
+      { term: "A-2", text: "Agricultural-Residential. Farming with moderate lot residential." },
+      { term: "A-3", text: "Rural Residential. Smaller ag lots transitioning to residential." },
+      { term: "AR", text: "Agricultural-Residential. Similar to A-3 with slightly different standards." },
+      { term: "R-1", text: "Single-Family Residential." },
+      { term: "R-2", text: "Two-Family Residential (Duplex)." },
+      { term: "R-3", text: "Multi-Family Residential." },
+      { term: "MH", text: "Manufactured Home district." },
+      { term: "B-1", text: "Neighborhood Business." },
+      { term: "B-2", text: "General Business." },
+      { term: "LI", text: "Light Industrial." },
+      { term: "HI", text: "Heavy Industrial." },
+      { term: "OI", text: "Office-Institutional." },
+      { term: "PD", text: "Planned Development. Flexible mixed-use overlay." },
+      { term: "8-Acre Split (A-2)", text: "Lots 8+ ac in A-2 may be split into 1.5 ac residential lots. Max 4 lots per parent tract. Must have public water or approved well." },
+      { term: "Minor Subdivision: 5-Lot Split", text: "Division of land into 5 or fewer lots, each meeting minimum district lot area, fronting a public street, and conforming to the Development Code." },
+      { term: "Minor Subdivision: Large Lot (min 25 acres)", text: "Division of land into lots of 25+ acres each, fronting a public street and conforming to the Development Code." },
     ],
   },
   "Oconee County": {
     districts: [
-      { code: "AG", density: "—" },
-      { code: "AR", density: "—" },
-      { code: "AR-3", density: "—" },
-      { code: "R1", density: "—" },
-      { code: "R2", density: "—" },
-      { code: "R3", density: "—" },
-      { code: "MH", density: "—" },
+      { code: "AG", density: "\u2014" },
+      { code: "AR", density: "1/lot" },
+      { code: "R-1", density: "1/lot" },
+      { code: "R-2", density: "2/lot" },
+      { code: "R-3", density: "4/ac" },
+      { code: "B-1", density: "\u2014" },
+      { code: "B-2", density: "\u2014" },
+      { code: "B-3", density: "\u2014" },
+      { code: "I-1", density: "\u2014" },
+      { code: "I-2", density: "\u2014" },
+      { code: "OIP", density: "\u2014" },
     ],
     sections: [
       {
         title: "Minimum Lot Area",
         rows: [
-          {
-            label: "With Sewer",
-            values: [
-              "5 ac",
-              "3 ac",
-              "2 ac",
-              "43,560",
-              "30,000",
-              "30,000",
-              "30,000",
-            ],
-            unit: "SF",
-          },
-          {
-            label: "Without Sewer",
-            values: [
-              "5 ac",
-              "3 ac",
-              "2 ac",
-              "65,340",
-              "51,000",
-              "N/A",
-              "51,000",
-            ],
-            unit: "SF",
-          },
-        ],
-      },
-      {
-        title: "Minimum Buildable Area",
-        rows: [
-          {
-            label: "Buildable Area (SF)",
-            values: [
-              "24,892",
-              "24,892",
-              "24,892",
-              "24,892",
-              "17,325",
-              "20,400",
-              "17,600",
-            ],
-            unit: "SF",
-          },
+          { label: "Septic", values: ["2 ac", "2 ac", "30,000", "30,000", "15,000", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014"], unit: "SF" },
+          { label: "Public Sewer", values: ["2 ac", "1 ac", "15,000", "12,000", "8,000", "15,000", "20,000", "20,000", "1 ac", "1 ac", "20,000"], unit: "SF" },
         ],
       },
       {
         title: "Minimum Lot Width",
         rows: [
-          {
-            label: "With Sewer",
-            values: ["100", "100", "100", "100", "125", "100", "100"],
-            unit: "FT",
-          },
-          {
-            label: "Without Sewer",
-            values: ["150", "150", "150", "150", "150", "150", "150"],
-            unit: "FT",
-          },
+          { label: "Width (Feet)", values: ["200", "150", "100", "85", "60", "100", "100", "100", "150", "150", "100"], unit: "FT" },
         ],
       },
       {
-        title: "Max Principal Building/Structure Height",
+        title: "Max Height",
         rows: [
-          {
-            label: "Max Height",
-            values: ["40", "40", "40", "40", "40", "40", "40"],
-            unit: "FT",
-          },
+          { label: "Max Height", values: ["35", "35", "35", "35", "45", "35", "45", "60", "45", "60", "45"], unit: "FT" },
         ],
       },
       {
-        title: "Minimum Principal Building Setback",
+        title: "Front Yard Setback",
         rows: [
-          {
-            label: "Front, Major Thoroughfare (from ROW)",
-            values: ["40", "40", "40", "40", "35", "30", "40"],
-            unit: "FT",
-          },
-          {
-            label: "Front, Minor Street (from ROW)",
-            values: ["30", "30", "30", "30", "25", "25", "30"],
-            unit: "FT",
-          },
-          {
-            label: "Side",
-            values: ["25", "15", "15", "10", "10", "—", "10"],
-            unit: "FT",
-          },
-          {
-            label: "Rear",
-            values: ["25", "40", "40", "40", "40", "15", "40"],
-            unit: "FT",
-          },
+          { label: "Arterial", values: ["60", "60", "40", "40", "40", "40", "60", "60", "60", "60", "40"], unit: "FT" },
+          { label: "Collector", values: ["50", "50", "35", "35", "35", "35", "50", "50", "50", "50", "35"], unit: "FT" },
+          { label: "Local", values: ["30", "30", "25", "25", "25", "25", "30", "30", "30", "30", "25"], unit: "FT" },
         ],
       },
       {
-        title: "Required Incompatible Use Buffer (Abutting)",
+        title: "Side Yard Setback",
         rows: [
-          {
-            label: "Agricultural",
-            values: ["—", "—", "—", "—", "—", "15", "15"],
-            unit: "FT",
-          },
-          {
-            label: "1 or 2 Family Residential",
-            values: ["—", "—", "—", "—", "—", "25", "25"],
-            unit: "FT",
-          },
+          { label: "Side (each)", values: ["20", "15", "10", "8", "5", "10", "15", "15", "20", "20", "10"], unit: "FT" },
         ],
       },
       {
-        title: "Minimum Floor Area per DU",
+        title: "Rear Yard Setback",
         rows: [
-          {
-            label: "1 Story",
-            values: [
-              "1,000",
-              "1,600",
-              "1,600",
-              "1,600",
-              "1,600",
-              "1,600",
-              "1,000",
-            ],
-            unit: "SF",
-          },
-          {
-            label: "2 Story",
-            values: ["—", "1,850", "1,850", "1,850", "1,850", "1,850", "—"],
-            unit: "SF",
-          },
-          {
-            label: "Two Family, per DU",
-            values: ["—", "—", "—", "1,500", "—", "1,500", "—"],
-            unit: "SF",
-          },
-          {
-            label: "MF",
-            values: ["—", "—", "—", "800 | 900 | 1,000", "—", "—", "—"],
-            unit: "SF",
-          },
+          { label: "Rear", values: ["30", "30", "20", "20", "20", "20", "20", "25", "30", "30", "20"], unit: "FT" },
         ],
       },
     ],
     definitions: [
-      {
-        term: "Minor Subdivision: 2-Lot Split",
-        text: "The combination or recombination of previously platted lots where the total number of lots is not increased and the resultant lots comply with this Development Code and all ordinances and resolutions of Oconee County.",
-      },
-      {
-        term: "Minor Subdivision: 5-Lot Split",
-        text: "The division of land into five or fewer lots, tracts or parcels with each resultant lot, tract or parcel: (a) Containing at least the minimum lot area required for the zoning district; (b) Fronting on a public street improved to County standards; (c) Conforming to this Development Code.",
-      },
-      {
-        term: "Minor Subdivision: Large Lot (min 25 acres)",
-        text: "The division of land into lots, tracts or parcels with each resultant lot, tract or parcel: (a) Containing 25 or more acres; (b) Fronting on a public street improved to County standards; (c) Conforming to this Development Code.",
-      },
+      { term: "AG", text: "Agricultural District. Large-lot farming and rural preservation." },
+      { term: "AR", text: "Agricultural-Residential. Transitional rural-residential." },
+      { term: "R-1", text: "Single-Family Residential." },
+      { term: "R-2", text: "Two-Family Residential." },
+      { term: "R-3", text: "Multi-Family Residential." },
+      { term: "B-1", text: "Neighborhood Business." },
+      { term: "B-2", text: "Highway Business." },
+      { term: "B-3", text: "General Business." },
+      { term: "I-1", text: "Light Industrial." },
+      { term: "I-2", text: "Heavy Industrial." },
+      { term: "OIP", text: "Office-Institutional-Professional." },
     ],
   },
-  "White County": {
-    note: "Source: White County Code of Ordinances, Appendix C Land Use Regulations (Res. 2019-09, as amended through Res. 2025-02). White County does not use a unified dimensional table — values are pulled from individual district articles.",
+  "Oglethorpe County": {
+    note: "Source: Oglethorpe County Unified Development Code (2018). PG district has no private spatial requirements (government use only). PD requirements vary by underlying district, approved via site plan. SP is an overlay district with max 50% lot coverage and 35 ft height. Verify with Oglethorpe County Planning at (706) 743-5270.",
     districts: [
-      { code: "A-1", density: "—" },
-      { code: "R-1", density: "—" },
-      { code: "R-2", density: "16/ac" },
-      { code: "R-3", density: "—" },
-      { code: "C-1", density: "—" },
-      { code: "C-2", density: "—" },
-      { code: "I", density: "—" },
-      { code: "PD", density: "—" },
+      { code: "A-1", density: "1/30ac" },
+      { code: "A-2", density: "1/lot" },
+      { code: "AR", density: "1/lot" },
+      { code: "R-1", density: "1/lot" },
+      { code: "R-2", density: "2/lot" },
+      { code: "R-3", density: "Varies" },
+      { code: "B-1", density: "\u2014" },
+      { code: "B-2", density: "\u2014" },
+      { code: "B-3", density: "\u2014" },
+      { code: "OIP", density: "\u2014" },
+      { code: "LI", density: "\u2014" },
+      { code: "HI", density: "\u2014" },
+      { code: "PG", density: "N/A" },
+      { code: "PD", density: "Varies" },
+      { code: "SP", density: "Varies" },
     ],
     sections: [
       {
-        title: "Minimum Lot Size",
+        title: "Minimum Lot Area",
         rows: [
-          { label: "Min Lot Area", values: ["10 ac","1 ac","—","—","—","—","—","20 ac"], unit: "" },
-        ],
-      },
-      {
-        title: "Minimum Lot Frontage (Sec 508)",
-        rows: [
-          { label: "Min Street Frontage", values: ["60","60","60","60","60","60","60","100"], unit: "FT" },
-          { label: "Cul-de-sac Frontage", values: ["35","35","35","35","35","35","35","35"], unit: "FT" },
+          { label: "Well + Septic", values: ["30 ac / 1.5 ac", "10 ac / 1.5 ac", "5 ac", "1.5 ac", "1.5 ac", "1.5 ac", "1.5 ac", "1.5 ac", "1.5 ac", "1.5 ac", "1.5 ac", "1.5 ac", "N/A", "Varies", "5 ac"], unit: "" },
+          { label: "Public Water + Septic", values: ["\u2014", "\u2014", "\u2014", "1.5 ac", "1.5 ac", "1.5 ac", "1.5 ac", "1.5 ac", "1.5 ac", "1.5 ac", "1.5 ac", "1.5 ac", "N/A", "Varies", "\u2014"], unit: "" },
+          { label: "Public Water + Sewer", values: ["\u2014", "\u2014", "\u2014", "0.5 ac", "0.5 ac", "0.5 ac", "0.5 ac", "0.5 ac", "0.5 ac", "0.5 ac", "0.5 ac", "1.0 ac", "N/A", "Varies", "\u2014"], unit: "" },
         ],
       },
       {
         title: "Minimum Lot Width",
         rows: [
-          { label: "Lot Width", values: ["—","—","—","—","—","—","—","500"], unit: "FT" },
+          { label: "Well + Septic", values: ["400", "400 / 200", "200", "200", "200", "200", "200", "200", "200", "200", "200", "200", "N/A", "Varies", "400"], unit: "FT" },
+          { label: "Public Water + Septic", values: ["\u2014", "\u2014", "\u2014", "125", "125", "125", "125", "125", "125", "125", "125", "125", "N/A", "Varies", "\u2014"], unit: "FT" },
+          { label: "Public Water + Sewer", values: ["\u2014", "\u2014", "\u2014", "100", "100", "100", "100", "100", "100", "100", "100", "125", "N/A", "Varies", "\u2014"], unit: "FT" },
         ],
       },
       {
-        title: "Minimum Principal Building Setback",
+        title: "Min Floor Area (SF dwelling)",
         rows: [
-          { label: "All Property Lines", values: ["15","15","15","15","15","15","15","15"], unit: "FT" },
-          { label: "Side/Rear w/ Buffer", values: ["—","—","30","—","—","—","—","—"], unit: "FT" },
-          { label: "Buffer from Res/Ag", values: ["—","—","—","—","—","—","100","—"], unit: "FT" },
+          { label: "SF Dwelling", values: ["900", "900", "900", "900", "900", "900", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "N/A", "Varies", "\u2014"], unit: "SF" },
+          { label: "Two-Family (principal)", values: ["\u2014", "\u2014", "\u2014", "\u2014", "900/450", "900/450", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "N/A", "Varies", "\u2014"], unit: "SF" },
+          { label: "Duplex (per unit)", values: ["\u2014", "\u2014", "\u2014", "\u2014", "600", "600", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "N/A", "Varies", "\u2014"], unit: "SF" },
+          { label: "Multi-Family (per unit)", values: ["\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "450", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "N/A", "Varies", "\u2014"], unit: "SF" },
         ],
       },
       {
-        title: "Separation Between Principal Buildings",
+        title: "Max Height",
         rows: [
-          { label: "Min Separation", values: ["20","20","20","20","20","20","20","20"], unit: "FT" },
+          { label: "Principal Building", values: ["35", "35", "35", "35", "35", "45", "35", "45", "45", "45", "45", "45", "N/A", "Varies", "35"], unit: "FT" },
+          { label: "Accessory Structure", values: ["\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "35", "35", "\u2014", "N/A", "Varies", "\u2014"], unit: "FT" },
         ],
       },
       {
-        title: "Max Density (Dwelling Units)",
+        title: "Front Yard Setback",
         rows: [
-          { label: "Multi-family", values: ["—","—","16","—","—","—","—","—"], unit: "/ac" },
-          { label: "Mfd Home Parks", values: ["—","—","1","—","—","—","—","—"], unit: "/ac" },
-          { label: "Attached SF (cond.)", values: ["—","—","4","—","—","—","—","—"], unit: "/ac" },
-          { label: "Detached Cottage (cond.)", values: ["—","—","5","—","—","—","—","—"], unit: "/ac" },
+          { label: "Arterial (from R/W)", values: ["100", "100", "100", "100", "100", "100", "100", "100", "100", "100", "100", "100", "N/A", "Varies", "\u2014"], unit: "FT" },
+          { label: "Arterial (no R/W, from CL)", values: ["150", "150", "150", "150", "150", "150", "150", "150", "150", "150", "150", "150", "N/A", "Varies", "\u2014"], unit: "FT" },
+          { label: "Collector (from R/W)", values: ["50", "50", "50", "50", "50", "50", "50", "50", "50", "50", "50", "50", "N/A", "Varies", "\u2014"], unit: "FT" },
+          { label: "Collector (no R/W, from CL)", values: ["80", "80", "80", "80", "80", "80", "80", "80", "80", "80", "80", "80", "N/A", "Varies", "\u2014"], unit: "FT" },
+          { label: "Local/Private (from R/W)", values: ["20", "20", "20", "20", "20", "20", "20", "20", "20", "20", "20", "20", "N/A", "Varies", "\u2014"], unit: "FT" },
+          { label: "Local/Private (no R/W, from CL)", values: ["50", "50", "50", "50", "50", "50", "50", "50", "50", "50", "50", "50", "N/A", "Varies", "\u2014"], unit: "FT" },
         ],
       },
       {
-        title: "Min Landscaped Open Space",
+        title: "Side Yard Setback",
         rows: [
-          { label: "% of Land Area", values: ["—","—","20%","—","—","—","—","—"], unit: "" },
+          { label: "Side (each)", values: ["20", "20", "20", "10", "20", "20+buf", "20+buf", "20+buf", "20+buf", "20+buf", "20+buf", "20+buf", "N/A", "Varies", "\u2014"], unit: "FT" },
         ],
       },
       {
-        title: "Accessory Buildings (Sec 511)",
+        title: "Rear Yard Setback",
         rows: [
-          { label: "Max Per Acre", values: ["3","3","3","3","3","3","3","3"], unit: "" },
-          { label: "Setback", values: ["15","15","15","15","15","15","15","15"], unit: "FT" },
-          { label: "Max Height (Res)", values: ["50","50","50","50","—","—","—","50"], unit: "FT" },
-          { label: "Min Dist from Principal Bldg", values: ["10","10","10","10","10","10","10","10"], unit: "FT" },
+          { label: "Rear", values: ["20", "20", "20", "10", "20", "20+buf", "20+buf", "20+buf", "20+buf", "20+buf", "20+buf", "20+buf", "N/A", "Varies", "\u2014"], unit: "FT" },
+        ],
+      },
+      {
+        title: "Max Lot Coverage / Building Separation",
+        rows: [
+          { label: "Max Lot Coverage", values: ["\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "60%", "70%", "75%", "80%", "75/60%", "75%", "80%", "N/A", "Varies", "50%"], unit: "" },
+          { label: "Min Building Separation", values: ["20", "20", "20", "20", "20", "20", "20", "20", "20", "20", "20", "20", "N/A", "Varies", "\u2014"], unit: "FT" },
+        ],
+      },
+      {
+        title: "Buffers (R-3 adjacent to R-1/R-2)",
+        rows: [
+          { label: "Buffer Width", values: ["\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "20", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "N/A", "Varies", "\u2014"], unit: "FT" },
+        ],
+      },
+      {
+        title: "R-3 MF Density (per dwelling unit)",
+        rows: [
+          { label: "MF Lot Area per Unit", values: ["\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "10,000 sf", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "N/A", "Varies", "\u2014"], unit: "" },
+        ],
+      },
+      {
+        title: "Street Frontage",
+        rows: [
+          { label: "Min Frontage", values: ["50", "50", "50", "50", "50", "50", "50", "50", "50", "50", "50", "50", "N/A", "Varies+50", "\u2014"], unit: "FT" },
+        ],
+      },
+      {
+        title: "A-1 Special Use Setbacks",
+        rows: [
+          { label: "Livestock Pavilion (side/rear)", values: ["100", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "N/A", "\u2014", "\u2014"], unit: "FT" },
+          { label: "Livestock Pavilion (adj. residence)", values: ["400", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "N/A", "\u2014", "\u2014"], unit: "FT" },
+          { label: "Ag Retail (side/rear)", values: ["100", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "N/A", "\u2014", "\u2014"], unit: "FT" },
+          { label: "Ag Retail (adj. residence)", values: ["200", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "N/A", "\u2014", "\u2014"], unit: "FT" },
+          { label: "Slaughterhouse (side/rear)", values: ["300", "300", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "N/A", "\u2014", "\u2014"], unit: "FT" },
+          { label: "Slaughterhouse (adj. residence)", values: ["500", "500", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "\u2014", "N/A", "\u2014", "\u2014"], unit: "FT" },
         ],
       },
     ],
     definitions: [
-      { term: "A-1 Non-Farm Residences (Sec 901)", text: "Non-farm single-family residences in A-1 require a minimum lot size of 10 acres, must be placed in accordance with all White County environmental codes, and must comply with any applicable conservation use covenant." },
-      { term: "R-1 Minimum Lot (Sec 1003)", text: "Stand-alone lots or residential developments in R-1 require a minimum of 1 acre." },
-      { term: "R-2 Density & Buffers (Sec 1100, 1103.7)", text: "Multi-family up to 16 units/acre. Manufactured home parks limited to 1 unit/acre. Conditional attached single-family max 4/ac; detached cottage max 5/ac. Side and rear setback with buffer min 30 ft. Min 20% of land area as landscaped open space." },
-      { term: "Industrial Buffer (Sec 1500)", text: "All uses in the Industrial district must be setback and buffered a minimum of 100 feet from all residential and agricultural districts. Racetracks require minimum 25-acre site." },
-      { term: "Planned Development (Sec 1600)", text: "PD must contain min 20 contiguous acres, min 500-ft lot width, and min 100 ft of frontage on a public street. Multi-family limited to 25% of total dwelling units; commercial/office limited to 40% of total land area." },
-      { term: "Churches & Cemeteries", text: "In A-1 and R-1 districts, cemeteries, churches, temples, synagogues, and places of worship must be set back 50 feet from all property lines." },
-      { term: "Agri-tourism & Events (A-1)", text: "Agri-tourism, heritage tourism, wedding tourism, event facilities, and attractions in A-1 must be buffered and located a minimum of 100 feet from the boundary of any other land use district." },
-      { term: "Street Frontage (Sec 508)", text: "All districts: minimum 60 ft street frontage. Cul-de-sac lots: min 35 ft. Double or reverse frontage lots must have proper frontage on all sides usable for access." },
-      { term: "Accessory Structures (Sec 512)", text: "Gasoline pumps: 30-ft setback. Canopies: 20-ft setback. Swimming pools: 30-ft setback. Commercial outdoor play structures: 35-ft setback." },
+      { term: "A-1", text: "Intensive Agricultural District. Animal containment (poultry, swine, dairy, livestock). 30 ac min for animal operations, 400 ft width. SF dwelling allowed at 1.5 ac/200 ft. Legacy setbacks apply to pre-Sept 2015 A-1; stricter setbacks for post-Sept 2015 rezonings." },
+      { term: "A-2", text: "General Agricultural District. Food/fiber crops, timber, horticulture, livestock pastures, limited containment. 10 ac min for principal ag use, 1.5 ac for SF dwelling." },
+      { term: "AR", text: "Agricultural/Rural Residential. Low-density rural residential, small-scale ag, horses. 5 ac min, 200 ft width. No commercial accessory structures." },
+      { term: "R-1", text: "Single-Family Residential. Must be on paved public roads with public water/sewer access. 0.5 ac min with full utilities; 1.5 ac if septic." },
+      { term: "R-2", text: "Two-Family Residential. SF or duplex. Must be on paved public roads with public water/sewer. 0.5 ac per dwelling unit." },
+      { term: "R-3", text: "Multi-Family Residential. SF, duplex, apartments, townhouses, manufactured housing parks. Must have public water/sewer. MF at 10,000 sf per unit, 200 ft width. 20 ft buffer adjacent to R-1/R-2. Max 60% lot coverage, 45 ft height. +5 ft setback per story above 2." },
+      { term: "B-1", text: "Local Business. Small neighborhood commercial (max 3,500 sf per establishment). Must abut paved collector street. Buffers required adjacent to residential." },
+      { term: "B-2", text: "Highway Business. Limited commercial along arterials. Max 40,000 sf (conditional use above). 45 ft height. 75% max lot coverage." },
+      { term: "B-3", text: "General Business. Full-range commercial at major intersections. Max 40,000 sf (conditional use above). 45 ft height. 80% max lot coverage." },
+      { term: "OIP", text: "Office/Institutional/Professional. Offices, clinics, institutions, limited retail. Must be on paved collector/arterial. 45 ft height. Max coverage 75% (arterial) or 60% (collector)." },
+      { term: "LI", text: "Light Industrial. Manufacturing, warehousing, trade shops. All operations within enclosed building. 45 ft height. 75% max lot coverage." },
+      { term: "HI", text: "Heavy Industrial. Intensive manufacturing, processing, quarries. Not near residential/scenic areas. 1.0 ac min with public sewer (vs 0.5 ac for other districts). 45 ft height. 80% max lot coverage." },
+      { term: "PG", text: "Public/Government. Land owned/operated by federal, state, county, or city government. No private spatial requirements. If sold to private party, must be rezoned." },
+      { term: "PD", text: "Planned Development. Overlay on residential, commercial, or industrial. Flexible internal standards approved via site plan. Min acreage: 50 ac (residential, no retail), 100 ac (residential + retail), 5 ac (commercial), 10 ac (industrial/OIP)." },
+      { term: "SP", text: "Scenic Preservation. Overlay protecting historic, natural, and scenic areas. Max 50% lot coverage, 35 ft height. Design standards require landscape preservation and visual compatibility." },
+      { term: "General: Min 20 ft between buildings", text: "Per Section 402, min 20 ft between principal buildings on multi-building lots, and min 20 ft between principal and accessory buildings." },
+      { term: "General: Lot size by utility type", text: "Per Section 401, lots with public water+sewer: 0.5 ac min. Lots with septic (any water source): 1.5 ac min. Lot widths: well+septic 200 ft, public water+septic 125 ft, full utilities 100 ft. Street frontage: 50 ft min." },
+      { term: "Animal Containment Setbacks (A-1)", text: "Pre-Sept 2015: Poultry 200 ft from property line, 600 ft from residences. Swine/livestock/dairy 400 ft from property line, 1,320/2,640 ft from residences. Post-Sept 2015: stricter, including 600 ft poultry from non-A-1 property and 1.5 mi swine from municipal boundaries." },
+    ],
+  },
+  "White County": {
+    note: "Source: White County Zoning Ordinance. Verify with White County Planning & Community Development at (706) 865-6838.",
+    districts: [
+      { code: "A-1", density: "1/lot" },
+      { code: "R-1", density: "1/lot" },
+      { code: "R-2", density: "2/lot" },
+      { code: "R-3", density: "4/ac" },
+      { code: "C-1", density: "\u2014" },
+      { code: "C-2", density: "\u2014" },
+      { code: "I-1", density: "\u2014" },
+      { code: "I-2", density: "\u2014" },
+    ],
+    sections: [
+      {
+        title: "Minimum Lot Area",
+        rows: [
+          { label: "Septic", values: ["2 ac", "1.5 ac", "1 ac", "0.5 ac", "1 ac", "1 ac", "1 ac", "2 ac"], unit: "AC" },
+          { label: "Public Sewer", values: ["1 ac", "0.5 ac", "0.5 ac", "10,000 sf", "0.5 ac", "0.5 ac", "0.5 ac", "1 ac"], unit: "" },
+        ],
+      },
+      {
+        title: "Minimum Lot Width",
+        rows: [
+          { label: "Width (Feet)", values: ["200", "150", "100", "80", "100", "100", "100", "150"], unit: "FT" },
+        ],
+      },
+      {
+        title: "Max Height",
+        rows: [
+          { label: "Max Height", values: ["35", "35", "35", "45", "35", "45", "45", "60"], unit: "FT" },
+        ],
+      },
+      {
+        title: "Front Yard Setback",
+        rows: [
+          { label: "Arterial", values: ["60", "50", "40", "40", "50", "60", "60", "60"], unit: "FT" },
+          { label: "Local", values: ["40", "30", "25", "25", "30", "40", "40", "40"], unit: "FT" },
+        ],
+      },
+      {
+        title: "Side Yard Setback",
+        rows: [
+          { label: "Side (each)", values: ["20", "15", "10", "10", "15", "15", "20", "25"], unit: "FT" },
+        ],
+      },
+      {
+        title: "Rear Yard Setback",
+        rows: [
+          { label: "Rear", values: ["30", "25", "25", "20", "25", "25", "30", "30"], unit: "FT" },
+        ],
+      },
+    ],
+    definitions: [
+      { term: "A-1", text: "Agricultural District. Farming and low-density residential." },
+      { term: "R-1", text: "Single-Family Residential." },
+      { term: "R-2", text: "Two-Family Residential." },
+      { term: "R-3", text: "Multi-Family Residential." },
+      { term: "C-1", text: "Neighborhood Commercial." },
+      { term: "C-2", text: "General Commercial." },
+      { term: "I-1", text: "Light Industrial." },
+      { term: "I-2", text: "Heavy Industrial." },
     ],
   },
 };
 
 const HIGHLIGHT_COLORS = {
+  "Banks County": { bg: "#4a2060", accent: "#7b3fa0", light: "#f0e6f6" },
   "Hall County": { bg: "#1a5632", accent: "#2d8a4e", light: "#e8f5ee" },
   "Jackson County": { bg: "#5c3317", accent: "#8b572a", light: "#f5ede6" },
-  "Banks County": { bg: "#4a2060", accent: "#7b3fa0", light: "#f0e6f6" },
   "Oconee County": { bg: "#1a3a56", accent: "#2a6a9e", light: "#e4eef8" },
-  "White County": { bg: "#3d4a5c", accent: "#5f7a9e", light: "#eaeef4" },
+  "Oglethorpe County": { bg: "#5c2028", accent: "#8b3a3a", light: "#f5e6e6" },
+  "White County": { bg: "#2d4a3e", accent: "#4a7a66", light: "#e6f0eb" },
 };
 
 export default function ZoningStandards() {
-  const [activeCounty, setActiveCounty] = useState("Hall County");
+  const [activeCounty, setActiveCounty] = useState("Banks County");
   const [highlightCol, setHighlightCol] = useState(null);
   const [compareMode, setCompareMode] = useState(false);
   const [compareCols, setCompareCols] = useState([]);
@@ -540,442 +520,325 @@ export default function ZoningStandards() {
   const toggleCompare = (idx) => {
     if (!compareMode) return;
     setCompareCols((prev) =>
-      prev.includes(idx) ? prev.filter((i) => i !== idx) : prev.length < 2 ? [...prev, idx] : [prev[1], idx]
+      prev.includes(idx)
+        ? prev.filter((i) => i !== idx)
+        : prev.length < 2
+        ? [...prev, idx]
+        : [prev[1], idx]
     );
   };
 
-  const isHighlighted = (idx) => {
-    if (compareMode) return compareCols.includes(idx);
-    return highlightCol === idx;
-  };
+  const countyNames = Object.keys(COUNTIES);
 
   return (
-    <div
-      style={{
-        minHeight: "100vh",
-        background: "#f7f6f3",
-        fontFamily: "'Source Serif 4', 'Georgia', serif",
-      }}
-    >
-      <link
-        href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@300;400;600;700&family=DM+Sans:wght@400;500;600;700&display=swap"
-        rel="stylesheet"
-      />
+    <div style={{ minHeight: "100vh", background: "#0f1119", fontFamily: "'DM Sans', sans-serif" }}>
+      <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Source+Serif+4:wght@600;700&display=swap" rel="stylesheet" />
 
       {/* Header */}
-      <div
-        style={{
-          background: colors.bg,
-          padding: "28px 24px 20px",
-          transition: "background 0.4s ease",
-        }}
-      >
-        <div style={{ maxWidth: 1200, margin: "0 auto" }}>
-          <div
-            style={{
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: 11,
-              fontWeight: 600,
-              letterSpacing: "0.15em",
-              textTransform: "uppercase",
-              color: "rgba(255,255,255,0.5)",
-              marginBottom: 4,
-            }}
-          >
-            Northeast Georgia
-          </div>
-          <h1
-            style={{
-              margin: 0,
-              fontSize: 26,
-              fontWeight: 700,
-              color: "#fff",
-              letterSpacing: "-0.02em",
-            }}
-          >
-            Zoning Development Standards
-          </h1>
-          <p
-            style={{
-              margin: "6px 0 0",
-              fontSize: 14,
-              color: "rgba(255,255,255,0.6)",
-              fontFamily: "'DM Sans', sans-serif",
-            }}
-          >
-            Dimensional requirements by zoning classification
-          </p>
+      <div style={{ padding: "28px 24px 0", maxWidth: 1200, margin: "0 auto" }}>
+        <h1 style={{
+          fontFamily: "'Source Serif 4', serif",
+          fontWeight: 700,
+          fontSize: "1.6rem",
+          color: "#e8eaf0",
+          letterSpacing: "-0.02em",
+          marginBottom: 4,
+        }}>
+          NE Georgia Zoning Standards
+        </h1>
+        <p style={{ color: "#6b7084", fontSize: "0.82rem", margin: 0 }}>
+          Development standards by zoning district. Click a column to highlight. Compare mode selects two.
+        </p>
+      </div>
+
+      {/* County Tabs */}
+      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "16px 24px 0" }}>
+        <div style={{
+          display: "flex",
+          gap: 3,
+          background: "#181b27",
+          border: "1px solid #2a2e3f",
+          borderRadius: 12,
+          padding: 4,
+          overflowX: "auto",
+          WebkitOverflowScrolling: "touch",
+        }}>
+          {countyNames.map((name) => (
+            <button
+              key={name}
+              onClick={() => {
+                setActiveCounty(name);
+                setHighlightCol(null);
+                setCompareMode(false);
+                setCompareCols([]);
+              }}
+              style={{
+                flex: "0 0 auto",
+                padding: "10px 16px",
+                borderRadius: 9,
+                border: "none",
+                cursor: "pointer",
+                fontWeight: 600,
+                fontSize: "0.78rem",
+                fontFamily: "'DM Sans', sans-serif",
+                transition: "all 0.2s",
+                color: activeCounty === name ? "#e8eaf0" : "#6b7084",
+                background: activeCounty === name
+                  ? `${HIGHLIGHT_COLORS[name].bg}cc`
+                  : "transparent",
+                boxShadow: activeCounty === name
+                  ? `0 0 0 1px ${HIGHLIGHT_COLORS[name].accent}66`
+                  : "none",
+                whiteSpace: "nowrap",
+              }}
+            >
+              {name}
+            </button>
+          ))}
         </div>
       </div>
 
-      {/* County Tabs + Controls */}
-      <div
-        style={{
-          background: "#fff",
-          borderBottom: "1px solid #e2e0db",
-          position: "sticky",
-          top: 0,
-          zIndex: 10,
-        }}
-      >
-        <div
+      {/* Compare Toggle */}
+      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "12px 24px 0" }}>
+        <button
+          onClick={() => {
+            setCompareMode(!compareMode);
+            setCompareCols([]);
+            setHighlightCol(null);
+          }}
           style={{
-            maxWidth: 1200,
-            margin: "0 auto",
-            padding: "0 24px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "space-between",
-            flexWrap: "wrap",
-            gap: 8,
+            padding: "6px 14px",
+            borderRadius: 7,
+            border: `1px solid ${compareMode ? colors.accent : "#2a2e3f"}`,
+            background: compareMode ? `${colors.bg}88` : "transparent",
+            color: compareMode ? colors.accent : "#6b7084",
+            fontSize: "0.75rem",
+            fontWeight: 600,
+            fontFamily: "'DM Sans', sans-serif",
+            cursor: "pointer",
           }}
         >
-          <div style={{ display: "flex", gap: 0 }}>
-            {Object.keys(COUNTIES).map((name) => {
-              const active = name === activeCounty;
-              return (
-                <button
-                  key={name}
-                  onClick={() => {
-                    setActiveCounty(name);
-                    setHighlightCol(null);
-                    setCompareCols([]);
-                  }}
-                  style={{
-                    padding: "14px 20px",
-                    border: "none",
-                    borderBottom: active
-                      ? `3px solid ${HIGHLIGHT_COLORS[name].accent}`
-                      : "3px solid transparent",
-                    background: "transparent",
-                    fontFamily: "'DM Sans', sans-serif",
-                    fontSize: 14,
-                    fontWeight: active ? 700 : 500,
-                    color: active ? HIGHLIGHT_COLORS[name].bg : "#888",
-                    cursor: "pointer",
-                    transition: "all 0.2s",
-                  }}
-                >
-                  {name}
-                </button>
-              );
-            })}
-          </div>
-          <button
-            onClick={() => {
-              setCompareMode(!compareMode);
-              setCompareCols([]);
-              setHighlightCol(null);
-            }}
-            style={{
-              padding: "6px 14px",
-              border: compareMode
-                ? `2px solid ${colors.accent}`
-                : "2px solid #ccc",
-              borderRadius: 6,
-              background: compareMode ? colors.light : "transparent",
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: 12,
-              fontWeight: 600,
-              color: compareMode ? colors.bg : "#666",
-              cursor: "pointer",
-              transition: "all 0.2s",
-            }}
-          >
-            {compareMode
-              ? `Compare Mode ON ${compareCols.length}/2`
-              : "Compare Districts"}
-          </button>
-        </div>
+          {compareMode ? "Exit Compare" : "Compare Districts"}
+        </button>
+        {compareMode && (
+          <span style={{ color: "#6b7084", fontSize: "0.72rem", marginLeft: 10 }}>
+            Select 2 columns to compare
+          </span>
+        )}
       </div>
 
       {/* Content */}
-      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "24px 24px 60px" }}>
-        {/* Source Note */}
+      <div style={{ maxWidth: 1200, margin: "0 auto", padding: "16px 24px 60px" }}>
+        {/* Verification Note */}
         {county.note && (
           <div
             style={{
               padding: "10px 16px",
-              marginBottom: 16,
-              background: county.note.toLowerCase().includes("verify") ? "#fff8e6" : "#eef4fa",
-              border: county.note.toLowerCase().includes("verify") ? "1px solid #f0d060" : "1px solid #c3d8ea",
+              marginBottom: 12,
+              background: county.note.toLowerCase().includes("verify")
+                ? "#fff8e6"
+                : "#e8f0ff",
+              border: `1px solid ${
+                county.note.toLowerCase().includes("verify")
+                  ? "#f0d060"
+                  : "#a0c0f0"
+              }`,
               borderRadius: 8,
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: 12,
-              color: county.note.toLowerCase().includes("verify") ? "#7a6520" : "#34567a",
+              fontSize: "0.72rem",
+              color: county.note.toLowerCase().includes("verify")
+                ? "#7a6520"
+                : "#3a5a8a",
               lineHeight: 1.5,
             }}
           >
-            {county.note.toLowerCase().includes("verify") ? "⚠️" : "ℹ️"} {county.note}
+            {county.note.toLowerCase().includes("verify") ? "\u26A0\uFE0F" : "\u2139\uFE0F"}{" "}
+            {county.note}
           </div>
         )}
-
-        {/* Scrollable Table Area */}
-        <div style={{ overflowX: "auto", WebkitOverflowScrolling: "touch" }}>
-        <div style={{ minWidth: `${140 + county.districts.length * 80}px` }}>
 
         {/* District Header Bar */}
         <div
           style={{
-            display: "grid",
-            gridTemplateColumns: `140px repeat(${county.districts.length}, minmax(70px, 1fr))`,
-            gap: 0,
-            marginBottom: 24,
+            overflowX: "auto",
+            WebkitOverflowScrolling: "touch",
+            borderRadius: "12px 12px 0 0",
           }}
         >
           <div
             style={{
-              padding: "12px 10px",
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: 11,
-              fontWeight: 600,
-              color: "#999",
-              textTransform: "uppercase",
-              letterSpacing: "0.1em",
+              display: "grid",
+              gridTemplateColumns: `140px repeat(${county.districts.length}, minmax(70px, 1fr))`,
+              minWidth: 140 + county.districts.length * 70,
             }}
           >
-            Zoning District
-          </div>
-          {county.districts.map((d, i) => (
             <div
-              key={d.code}
-              onClick={() => {
-                if (compareMode) {
-                  toggleCompare(i);
-                } else {
-                  setHighlightCol(highlightCol === i ? null : i);
-                }
-              }}
               style={{
-                padding: "10px 8px",
-                textAlign: "center",
-                cursor: "pointer",
-                borderRadius: 8,
-                background: isHighlighted(i) ? colors.accent : "transparent",
-                transition: "all 0.2s ease",
-                border: isHighlighted(i) ? "none" : "2px solid transparent",
+                background: colors.bg,
+                padding: "12px 14px",
+                borderRadius: "12px 0 0 0",
               }}
             >
-              <div
-                style={{
-                  fontFamily: "'DM Sans', sans-serif",
-                  fontSize: 18,
-                  fontWeight: 700,
-                  color: isHighlighted(i) ? "#fff" : colors.bg,
-                  letterSpacing: "-0.02em",
-                }}
-              >
-                {d.code}
-              </div>
-              {d.density !== "—" && (
+              <span style={{ color: "#ffffff99", fontSize: "0.7rem", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.06em" }}>
+                District
+              </span>
+            </div>
+            {county.districts.map((d, idx) => {
+              const isHighlighted =
+                (!compareMode && highlightCol === idx) ||
+                (compareMode && compareCols.includes(idx));
+              return (
                 <div
+                  key={d.code}
+                  onClick={() => {
+                    if (compareMode) {
+                      toggleCompare(idx);
+                    } else {
+                      setHighlightCol(highlightCol === idx ? null : idx);
+                    }
+                  }}
                   style={{
-                    fontFamily: "'DM Sans', sans-serif",
-                    fontSize: 10,
-                    color: isHighlighted(i) ? "rgba(255,255,255,0.7)" : "#999",
-                    marginTop: 2,
+                    background: isHighlighted ? colors.accent : colors.bg,
+                    padding: "12px 6px",
+                    textAlign: "center",
+                    cursor: "pointer",
+                    transition: "background 0.15s",
+                    borderRadius: idx === county.districts.length - 1 ? "0 12px 0 0" : 0,
                   }}
                 >
-                  {d.density}
+                  <div style={{ color: "#fff", fontSize: "0.78rem", fontWeight: 700 }}>{d.code}</div>
+                  <div style={{ color: "#ffffff88", fontSize: "0.62rem", marginTop: 2 }}>{d.density}</div>
                 </div>
-              )}
+              );
+            })}
+          </div>
+
+          {/* Data Sections */}
+          {county.sections.map((section, sIdx) => (
+            <div key={sIdx}>
+              <div
+                style={{
+                  display: "grid",
+                  gridTemplateColumns: `140px repeat(${county.districts.length}, minmax(70px, 1fr))`,
+                  minWidth: 140 + county.districts.length * 70,
+                }}
+              >
+                <div
+                  style={{
+                    gridColumn: `1 / -1`,
+                    background: "#1a1d2a",
+                    padding: "8px 14px",
+                    borderTop: "1px solid #2a2e3f",
+                  }}
+                >
+                  <span style={{ color: colors.accent, fontSize: "0.72rem", fontWeight: 700, textTransform: "uppercase", letterSpacing: "0.04em" }}>
+                    {section.title}
+                  </span>
+                </div>
+              </div>
+              {section.rows.map((row, rIdx) => (
+                <div
+                  key={rIdx}
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: `140px repeat(${county.districts.length}, minmax(70px, 1fr))`,
+                    minWidth: 140 + county.districts.length * 70,
+                    borderTop: "1px solid #1e2130",
+                  }}
+                >
+                  <div
+                    style={{
+                      padding: "8px 14px",
+                      background: "#13151f",
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    <span style={{ color: "#8a8fa3", fontSize: "0.7rem", lineHeight: 1.3 }}>
+                      {row.label}
+                      {row.unit && (
+                        <span style={{ color: "#5a5f73", fontSize: "0.6rem", marginLeft: 4 }}>
+                          {row.unit}
+                        </span>
+                      )}
+                    </span>
+                  </div>
+                  {row.values.map((val, vIdx) => {
+                    const isHighlighted =
+                      (!compareMode && highlightCol === vIdx) ||
+                      (compareMode && compareCols.includes(vIdx));
+                    return (
+                      <div
+                        key={vIdx}
+                        onClick={() => {
+                          if (compareMode) {
+                            toggleCompare(vIdx);
+                          } else {
+                            setHighlightCol(highlightCol === vIdx ? null : vIdx);
+                          }
+                        }}
+                        style={{
+                          padding: "8px 6px",
+                          textAlign: "center",
+                          background: isHighlighted ? colors.light + "18" : "#13151f",
+                          cursor: "pointer",
+                          transition: "background 0.15s",
+                          borderLeft: isHighlighted
+                            ? `2px solid ${colors.accent}44`
+                            : "2px solid transparent",
+                        }}
+                      >
+                        <span
+                          style={{
+                            color: val === "\u2014" || val === "N/A" ? "#3a3e50" : isHighlighted ? "#e8eaf0" : "#c0c4d4",
+                            fontSize: "0.72rem",
+                            fontWeight: isHighlighted ? 600 : 400,
+                          }}
+                        >
+                          {val}
+                        </span>
+                      </div>
+                    );
+                  })}
+                </div>
+              ))}
             </div>
           ))}
         </div>
 
-        {/* Sections */}
-        {county.sections.map((section, si) => (
-          <div
-            key={si}
-            style={{
-              marginBottom: 20,
-              background: "#fff",
-              borderRadius: 10,
-              border: "1px solid #e8e6e1",
-              overflow: "hidden",
-            }}
-          >
-            <div
-              style={{
-                padding: "12px 16px",
-                background: "#fafaf8",
-                borderBottom: "1px solid #e8e6e1",
-              }}
-            >
-              <h3
-                style={{
-                  margin: 0,
-                  fontFamily: "'DM Sans', sans-serif",
-                  fontSize: 13,
-                  fontWeight: 700,
-                  color: colors.bg,
-                  textTransform: "uppercase",
-                  letterSpacing: "0.06em",
-                }}
-              >
-                {section.title}
-              </h3>
-            </div>
-            {section.rows.map((row, ri) => (
-              <div
-                key={ri}
-                style={{
-                  display: "grid",
-                  gridTemplateColumns: `140px repeat(${county.districts.length}, minmax(70px, 1fr))`,
-                  gap: 0,
-                  borderBottom:
-                    ri < section.rows.length - 1
-                      ? "1px solid #f0eeea"
-                      : "none",
-                }}
-              >
-                <div
-                  style={{
-                    padding: "10px 10px",
-                    fontFamily: "'DM Sans', sans-serif",
-                    fontSize: 12,
-                    fontWeight: 500,
-                    color: "#666",
-                    display: "flex",
-                    alignItems: "center",
-                  }}
-                >
-                  {row.label}
-                  {row.unit && (
-                    <span
-                      style={{
-                        marginLeft: 4,
-                        fontSize: 10,
-                        color: "#aaa",
-                        fontWeight: 400,
-                      }}
-                    >
-                      ({row.unit})
-                    </span>
-                  )}
-                </div>
-                {row.values.map((val, vi) => {
-                  const highlighted = isHighlighted(vi);
-                  const isDash = val === "—" || val === "N/A";
-                  return (
-                    <div
-                      key={vi}
-                      style={{
-                        padding: "10px 8px",
-                        textAlign: "center",
-                        fontFamily: "'DM Sans', sans-serif",
-                        fontSize: 13,
-                        fontWeight: highlighted ? 700 : isDash ? 400 : 500,
-                        color: highlighted
-                          ? colors.bg
-                          : isDash
-                          ? "#ccc"
-                          : "#333",
-                        background: highlighted
-                          ? colors.light
-                          : "transparent",
-                        transition: "all 0.15s ease",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      {val}
-                    </div>
-                  );
-                })}
-              </div>
-            ))}
-          </div>
-        ))}
-
-        </div>
-        </div>
-        {/* End Scrollable Table Area */}
-
         {/* Definitions */}
         {county.definitions && county.definitions.length > 0 && (
-          <div
-            style={{
-              marginTop: 32,
-              padding: "20px 24px",
-              background: "#fff",
-              borderRadius: 10,
-              border: "1px solid #e8e6e1",
-            }}
-          >
-            <h3
-              style={{
-                margin: "0 0 16px",
-                fontFamily: "'DM Sans', sans-serif",
-                fontSize: 13,
-                fontWeight: 700,
-                color: colors.bg,
-                textTransform: "uppercase",
-                letterSpacing: "0.06em",
-              }}
-            >
-              Key Definitions
+          <div style={{ marginTop: 28 }}>
+            <h3 style={{
+              color: "#e8eaf0",
+              fontSize: "0.88rem",
+              fontFamily: "'Source Serif 4', serif",
+              fontWeight: 600,
+              marginBottom: 12,
+            }}>
+              District & Term Reference
             </h3>
-            {county.definitions.map((def, di) => (
-              <div key={di} style={{ marginBottom: di < county.definitions.length - 1 ? 14 : 0 }}>
+            <div style={{ display: "grid", gap: 8 }}>
+              {county.definitions.map((def, idx) => (
                 <div
+                  key={idx}
                   style={{
-                    fontFamily: "'DM Sans', sans-serif",
-                    fontSize: 13,
-                    fontWeight: 700,
-                    color: "#333",
-                    marginBottom: 4,
+                    background: "#181b27",
+                    border: "1px solid #2a2e3f",
+                    borderRadius: 8,
+                    padding: "10px 14px",
                   }}
                 >
-                  {def.term}
+                  <span style={{ color: colors.accent, fontSize: "0.74rem", fontWeight: 700 }}>
+                    {def.term}
+                  </span>
+                  <span style={{ color: "#8a8fa3", fontSize: "0.72rem", marginLeft: 8, lineHeight: 1.5 }}>
+                    {def.text}
+                  </span>
                 </div>
-                <div
-                  style={{
-                    fontSize: 13,
-                    color: "#666",
-                    lineHeight: 1.5,
-                  }}
-                >
-                  {def.text}
-                </div>
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
         )}
-
-        {/* Footer */}
-        <div
-          style={{
-            marginTop: 32,
-            padding: "16px 0",
-            borderTop: "1px solid #e8e6e1",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            flexWrap: "wrap",
-            gap: 8,
-          }}
-        >
-          <div
-            style={{
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: 11,
-              color: "#aaa",
-            }}
-          >
-            Source: County Development Codes. Verify with local planning office before use.
-          </div>
-          <div
-            style={{
-              fontFamily: "'DM Sans', sans-serif",
-              fontSize: 11,
-              color: "#aaa",
-            }}
-          >
-            Foothills Real Estate | Hall County, GA
-          </div>
-        </div>
       </div>
     </div>
   );
